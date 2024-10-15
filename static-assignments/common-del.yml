@@ -1,0 +1,37 @@
+---
+- name: Update web, nfs, and db servers
+  hosts: webservers, nfs, db
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+  tasks:
+    - name: Delete Wireshark (RHEL/CentOS)
+      yum:
+        name: wireshark
+        state: removed
+        use_backend: "dnf"
+      when: ansible_facts['pkg_mgr'] == "yum"  # Only for RHEL-based systems
+
+    - name: Delete Wireshark (Debian/Ubuntu)
+      apt:
+        name: wireshark-qt
+        state: absent
+        autoremove: yes
+        purge: yes
+        autoclean: yes
+      when: ansible_facts['pkg_mgr'] == "apt"  # Only for Debian-based systems
+
+- name: Update LB server
+  hosts: lb
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  tasks:
+    - name: Delete Wireshark (Debian/Ubuntu)
+      apt:
+        name: wireshark-qt
+        state: absent
+        autoremove: yes
+        purge: yes
+        autoclean: yes
+
