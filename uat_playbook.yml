@@ -1,0 +1,7 @@
+---
+- name: Configure UAT Web Servers
+  hosts: uat
+  become: yes
+  roles:
+    - webserver
+
