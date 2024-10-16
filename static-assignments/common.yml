@@ -1,0 +1,31 @@
+---
+- name: Update web, nfs, and db servers
+  hosts: webservers, nfs, db
+  become: yes
+  tasks:
+    - name: Ensure Wireshark is at the latest version (RHEL/CentOS)
+      yum:
+        name: wireshark
+        state: latest
+      when: ansible_os_family == "RedHat"  # Only run if the OS is RedHat-based
+
+    - name: Ensure Wireshark is at the latest version (Debian/Ubuntu)
+      apt:
+        name: wireshark
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "Debian"  # Only run if the OS is Debian-based
+
+- name: Update LB server
+  hosts: lb
+  become: yes
+  tasks:
+    - name: Update apt repo
+      apt:
+        update_cache: yes
+
+    - name: Ensure Wireshark is at the latest version
+      apt:
+        name: wireshark
+        state: latest
+
