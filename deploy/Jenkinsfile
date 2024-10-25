@@ -14,6 +14,7 @@ pipeline {
             steps {
                 // Checkout code from SCM (your Git repository)
                 checkout scm
+		git branch: 'main', url: 'https://github.com/Maarioon/ansible-config-mgt.git'
             }
         }
 
@@ -21,7 +22,7 @@ pipeline {
             steps {
                 script {
                     // Run the Ansible playbook against UAT environment
-                    sh 'ansible-playbook -i inventory/uat playbooks/site.yml --extra-vars "@env-vars/uat.yml"'
+                   ansiblePlaybook credentialsId: 'private_key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory', playbook: 'playbooks', vaultTmpPath: ''
                 }
             }
         }
