@@ -1,29 +1,52 @@
 pipeline {
     agent any
-
+    
     environment {
-        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/.ansible.cfg"
-    }
-
-    tools {
-        ansible 'ansible'
+        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
     }
 
     stages {
-        stage('Checkout') {
+        stage('Initial Cleanup') {
             steps {
-                checkout scm
-                git branch: 'main', url: 'https://github.com/Maarioon/ansible-config-mgt.git'
+                dir("${WORKSPACE}") {
+                    deleteDir()
+                }
             }
         }
 
-        stage('Run Ansible Playbook') {
+        stage('Checkout SCM') {
+            steps {
+                git branch: 'main', 
+                    url: 'https://github.com/Maarioon/ansible-config-mgt.git'
+            }
+        }
+
+        stage('Prepare Ansible') {
             steps {
                 script {
-                    sh "/usr/bin/ansible-playbook ${WORKSPACE}/ansible-config-mgt/playbooks/site.yml -i ${WORKSPACE}/ansible-config-mgt/inventory/dev --private-key /var/lib/jenkins/workspace/ansible-config-mgt_main/ssh_key -u \$USER"
+                    sh '''
+                        echo "Checking Ansible version..."
+                        ansible --version
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to Dev') {
+            steps {
+                script {
+                    sh '''
+                        echo "Running Ansible playbook..."
+                        ansible-playbook -i deploy/inventory/dev.yml deploy/playbook/site.yml
+              '''
                 }
             }
         }
     }
-}
 
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
