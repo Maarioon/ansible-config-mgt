@@ -22,7 +22,8 @@ pipeline {
             steps {
                 script {
                     // Run the Ansible playbook against UAT environment
-                   ansiblePlaybook credentialsId: 'private_key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory', playbook: 'playbooks', vaultTmpPath: ''
+                   /usr/bin/ansible-playbook playbooks/site.yml -i inventory/dev --private-key /var/lib/jenkins/workspace/ansible-config-mgt_main/ssh12157171592243037065.key -u ubuntu
+
                 }
             }
         }
