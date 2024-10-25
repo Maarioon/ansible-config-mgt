@@ -22,9 +22,9 @@ pipeline {
             steps {
                 script {
                     // Run the Ansible playbook against UAT environment
-                   /usr/bin/ansible-playbook playbooks/site.yml -i inventory/dev --private-key /var/lib/jenkins/workspace/ansible-config-mgt_main/ssh12157171592243037065.key -u ubuntu
+                   /usr/bin/ansible-playbook ansible-config-mgt/playbooks/site.yml -i ansible-config-mgt/inventory/dev --private-key /var/lib/jenkins/workspace/ansible-config-mgt_main/ssh12157171592243037065.key -u ubuntu
 
-                }
+               }
             }
         }
     }
