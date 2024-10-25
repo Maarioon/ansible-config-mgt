@@ -1,43 +1,27 @@
 pipeline {
     agent any
 
+    environment {
+        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/.ansible.cfg"  // Points to the Ansible config file in the deploy directory
+    }
+
+    tools {
+        ansible 'ansible'  // Make sure 'ansible' is configured in Jenkins Global Tool Configuration
+    }
+
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                script {
-                    sh 'echo "Building Stage"'
-                }
+                // Checkout code from SCM (your Git repository)
+                checkout scm
             }
         }
 
-        stage('Test') {
+        stage('Run Ansible Playbook') {
             steps {
                 script {
-                    sh 'echo "Testing Stage"'
-                }
-            }
-        }
-
-        stage('Package') {
-            steps {
-                script {
-                    sh 'echo "Packaging Stage"'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    sh 'echo "Deploying Stage"'
-                }
-            }
-        }
-
-        stage('Clean up') {
-            steps {
-                script {
-                    sh 'echo "Cleaning Up Stage"'
+                    // Run the Ansible playbook against UAT environment
+                    sh 'ansible-playbook -i inventory/uat playbooks/site.yml --extra-vars "@env-vars/uat.yml"'
                 }
             }
         }
