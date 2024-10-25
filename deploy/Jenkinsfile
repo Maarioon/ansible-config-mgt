@@ -1,34 +1,26 @@
-pipeline { 
+pipeline {
     agent any
 
     environment {
-        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/.ansible.cfg"  // Points to the Ansible config file in the deploy directory
+        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/.ansible.cfg"
     }
 
     tools {
-        ansible 'ansible'  // Make sure 'ansible' is configured in Jenkins Global Tool Configuration
+        ansible 'ansible'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                // Checkout code from SCM (your Git repository)
                 checkout scm
-                // Alternatively, if you want to explicitly define it:
-                // git branch: 'main', url: 'https://github.com/Maarioon/ansible-config-mgt.git'
+                git branch: 'main', url: 'https://github.com/Maarioon/ansible-config-mgt.git'
             }
         }
 
         stage('Run Ansible Playbook') {
             steps {
                 script {
-                    // Run the Ansible playbook against UAT environment
-                    sh """
-                    /usr/bin/ansible-playbook ${WORKSPACE}/ansible-config-mgt/playbooks/site.yml \
-                        -i ${WORKSPACE}/ansible-config-mgt/inventory/dev \
-                        --private-key ${WORKSPACE}/ssh12157171592243037065.key \
-                        -u ubuntu
-                    """
+                    sh "/usr/bin/ansible-playbook ${WORKSPACE}/ansible-config-mgt/playbooks/site.yml -i ${WORKSPACE}/ansible-config-mgt/inventory/dev --private-key /var/lib/jenkins/workspace/ansible-config-mgt_main/ssh_key -u \$USER"
                 }
             }
         }
