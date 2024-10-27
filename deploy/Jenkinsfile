@@ -1,56 +1,57 @@
-pipeline {
-    agent any
-    
-    environment {
-        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
-    }
 
-    stages {
-        stage('Initial Cleanup') {
-            steps {
-                dir("${WORKSPACE}") {
-                    deleteDir()
-                }
-            }
-        }
 
-        stage('Checkout SCM') {
-            steps {
-                git branch: 'main', 
-                    url: 'https://github.com/Maarioon/ansible-config-mgt.git
-            }
-        }
 
-        stage('Prepare SSH key') {
-            steps {
-                script {
-                    // Copy the SSH private key from Jenkins credentials
-                    withCredentials([file(credentialsId: 'marion-dev-key', variable: 'SSH_KEY')]) {
-                        sh '''
-                            cp $SSH_KEY ${WORKSPACE}/marion-dev.pem
-                            chmod 400 ${WORKSPACE}/marion-dev.pem
-                        '''
-                    }
-                }
-            }
-        }
-
-        stage('Deploy to Dev Environment') {
-            steps {
-                script {
-                    sh '''
-                        ansible-playbook -i inventory/dev.yml playbooks/site.yml \
-                        --private-key=${WORKSPACE}/marion-dev.pem \
-                        -vv  # Added verbosity for debugging
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            cleanWs()
-        }
-    }
-}
+ pipeline {
+     agent any
+     
+     environment {
+         ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
+     }
+ 
+     stages {
+         stage('Initial Cleanup') {
+             steps {
+                 dir("${WORKSPACE}") {
+                     deleteDir()
+                 }
+             }
+         }
+         stage('Checkout SCM') {
+             steps {
+                 git branch: 'main', 
+                     url: 'https://github.com/Maarioon/ansible-config-mgt.git
+             }
+         }
+         stage('Build') {
+             steps {
+                 script {
+                     sh 'echo "Building Stage"'
+                 }
+             }
+         }
+ 
+         stage('Test') {
+             steps {
+                 script {
+                     sh 'echo "Testing Stage"'
+                 }
+             }
+         }
+ 
+         stage('Package') {
+             steps {
+                 script {
+                     sh 'echo "Packaging Stage"'
+                 }
+             }
+         }
+ 
+         stage('Deploy') {
+             steps {
+                 script {
+                     sh 'echo "Deploying Stage"'
+                 }
+             }
+         }
+     }
+ }
