@@ -9,19 +9,7 @@
      }
  
      stages {
-         stage('Initial Cleanup') {
-             steps {
-                 dir("${WORKSPACE}") {
-                     deleteDir()
-                 }
-             }
-         }
-         stage('Checkout SCM') {
-             steps {
-                 git branch: 'main', 
-                     url: 'https://github.com/Maarioon/ansible-config-mgt.git
-             }
-         }
+       
          stage('Build') {
              steps {
                  script {
