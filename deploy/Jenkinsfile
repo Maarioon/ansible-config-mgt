@@ -1,37 +1,17 @@
-
 pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('SCM Checkout') {
             steps {
-                script {
-                    sh 'echo "Building Stage"'
-                }
+                git branch: 'main', url: 'https://github.com/Maarioon/ansible-config-mgt.git'
             }
         }
-
-        stage('Test') {
+        stage('Execute Ansible') {
             steps {
-                script {
-                    sh 'echo "Testing Stage"'
-                }
+                ansiblePlaybook credentialsId: 'private_key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml', vaultTmpPath: ''
             }
         }
-
-        stage('Package') {
-            steps {
-                script {
-                    sh 'echo "Packaging Stage"'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    sh 'echo "Deploying Stage"'
-                }
-            }
-	}
+    }
+}
 
