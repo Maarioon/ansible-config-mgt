@@ -1,52 +1,37 @@
+
 pipeline {
     agent any
-    
-    environment {
-        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
-    }
 
     stages {
-        stage('Initial Cleanup') {
-            steps {
-                dir("${WORKSPACE}") {
-                    deleteDir()
-                }
-            }
-        }
-
-        stage('Checkout SCM') {
-            steps {
-                git branch: 'main', 
-                    url: 'https://github.com/Maarioon/ansible-config-mgt.git'
-            }
-        }
-
-        stage('Prepare Ansible') {
+        stage('Build') {
             steps {
                 script {
-                    sh '''
-                        echo "Checking Ansible version..."
-                        ansible --version
-                    '''
+                    sh 'echo "Building Stage"'
                 }
             }
         }
 
-        stage('Deploy to Dev') {
+        stage('Test') {
             steps {
                 script {
-                    sh '''
-                        echo "Running Ansible playbook..."
-                        ansible-playbook -i deploy/inventory/dev.yml deploy/playbook/site.yml
-              '''
+                    sh 'echo "Testing Stage"'
                 }
             }
         }
-    }
 
-    post {
-        always {
-            cleanWs()
+        stage('Package') {
+            steps {
+                script {
+                    sh 'echo "Packaging Stage"'
+                }
+            }
         }
-    }
-}
+
+        stage('Deploy') {
+            steps {
+                script {
+                    sh 'echo "Deploying Stage"'
+                }
+            }
+	}
+
