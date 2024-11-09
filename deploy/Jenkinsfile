@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     // Navigate to the correct folder if necessary
-                    sh 'cd /var/lib/jenkins/workspace/ansible-config-mgt && composer install'
+                    sh 'cd /ansible-config-mgt && composer install'
                 }
             }
         }
