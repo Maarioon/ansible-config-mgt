@@ -1,9 +1,7 @@
-
 pipeline {
     agent any
 
     stages {
-
         stage("Initial cleanup") {
             steps {
                 dir("${WORKSPACE}") {
@@ -18,25 +16,35 @@ pipeline {
             }
         }
 
+        stage('Install PHP curl extension') {
+            steps {
+                script {
+                    // Update the system and install PHP cURL extension
+                    sh 'sudo apt-get update -y'
+                    sh 'sudo apt-get install -y php8.3-curl'
+                    sh 'sudo service php8.3-fpm restart'  // Restart PHP-FPM (or use Apache if that's your server)
+                }
+            }
+        }
+
         stage('Prepare Dependencies') {
             steps {
-                sh 'mv .env.sample .env'               // Rename .env file
-                sh 'composer install'                  // Install dependencies
-                sh 'php artisan migrate'               // Run database migrations
-                sh 'php artisan db:seed'               // Seed the database
-                sh 'php artisan key:generate'          // Generate application key
+                sh 'mv .env.sample .env'
+                sh 'composer install'
+                sh 'php artisan migrate'
+                sh 'php artisan db:seed'
+                sh 'php artisan key:generate'
             }
         }
 
         stage('Execute Unit Tests') {
             steps {
-                sh './vendor/bin/phpunit'              // Run unit tests
+                sh './vendor/bin/phpunit'
             }
         }
 
         stage('Code Analysis') {
             steps {
-                // Run phploc for code analysis and save output to CSV
                 sh 'phploc app/ --log-csv build/logs/phploc.csv'
             }
         }
