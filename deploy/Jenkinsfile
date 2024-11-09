@@ -18,6 +18,13 @@ pipeline {
       }
     }
 
+    
+    stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      } 
+
+
     stage('Install Composer') {
             steps {
                 // Install Composer if not already installed
