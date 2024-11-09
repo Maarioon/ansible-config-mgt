@@ -27,6 +27,16 @@ pipeline {
             }
         }
 
+
+       stage('Install Composer Dependencies') {
+            steps {
+                script {
+                    // Navigate to the correct folder if necessary
+                    sh 'cd /var/lib/jenkins/workspace/ansible-config-mgt && composer install'
+                }
+            }
+        }
+
         stage('Prepare Dependencies') {
             steps {
                 sh 'mv .env.sample .env'
