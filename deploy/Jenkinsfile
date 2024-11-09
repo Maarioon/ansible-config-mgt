@@ -18,8 +18,22 @@ pipeline {
       }
     }
 
+    stage('Install Composer') {
+            steps {
+                // Install Composer if not already installed
+                sh '''
+                    if ! command -v composer &> /dev/null
+                    then
+                        curl -sS https://getcomposer.org/installer | php
+                        mv composer.phar /usr/local/bin/composer
+                    fi
+                '''
+            }
+        }
+
     stage('Prepare Dependencies') {
       steps {
+             sh 'pwd'
              sh 'mv .env.sample .env'
              sh 'composer install'
              sh 'php artisan migrate'
