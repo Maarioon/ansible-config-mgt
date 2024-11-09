@@ -1,6 +1,18 @@
 {
+    "name": "ubuntu/ansible-config-mgt",
+    "autoload": {
+        "psr-4": {
+            "Ubuntu\\AnsibleConfigMgt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marioon",
+            "email": "luwamarielleky@gmail.com"
+        }
+    ],
     "require": {
-        "doctrine/instantiator": "^1.4",
-        "phpspec/prophecy": "^1.13"
+        "phpunit/phpunit": "^11.4",
+        "doctrine/instantiator": "^2.0"
     }
 }
