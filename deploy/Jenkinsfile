@@ -1,42 +1,39 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout SCM') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
-            }
-        }
+  stages {
 
-        stage('Execute Unit Tests') {
-            steps {
-                sh './vendor/bin/phpunit'
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
             }
+          }
         }
-
-        stage('Prepare Dependencies') {
-            steps {
-                sh 'pwd'
-                sh 'mv .env.sample .env'
-                sh 'composer install'
-                sh 'php artisan migrate'
-                sh 'php artisan db:seed'
-                sh 'php artisan key:generate'
-            }
-        }
-
-        stage('Install Composer') {
-            steps {
-                // Install Composer if not already installed
-                sh '''
-                    if ! command -v composer &> /dev/null
-                    then
-                        curl -sS https://getcomposer.org/installer | php
-                        mv composer.phar /usr/local/bin/composer
-                    fi
-                '''
-            }
-        }
+  
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/StegTechHub/php-todo.git'
+      }
     }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+
+   stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      } 
+
+  }
 }
+
+
 
