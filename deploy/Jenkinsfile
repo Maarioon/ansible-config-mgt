@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Update the system and install PHP cURL extension
-                    sh 'sudo apt-get update -y'
+                    sh "echo 'Opeoluwa1.' | sudo -S apt-get update -y"
                     sh 'sudo apt-get install -y php8.3-curl'
                     sh 'sudo service php8.3-fpm restart'  // Restart PHP-FPM (or use Apache if that's your server)
                 }
