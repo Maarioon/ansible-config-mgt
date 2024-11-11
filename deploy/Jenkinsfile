@@ -20,6 +20,8 @@ pipeline {
         stage('Prepare Dependencies') {
             steps {
                 sh 'mv .env.sample .env'               // Rename .env file
+                sh 'mkdir -p bootstrap/cache'
+
                 sh 'composer install'                  // Install dependencies
                 sh 'php artisan migrate'               // Run database migrations
                 sh 'php artisan db:seed'               // Seed the database
