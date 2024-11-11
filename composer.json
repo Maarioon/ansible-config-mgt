@@ -13,13 +13,7 @@
     ],
     "require": {
         "doctrine/instantiator": "^1.0.5",
-        "phpspec/prophecy": "^1.6",
-        "phpunit/phpunit-mock-objects": "^2.3.8"
-    },
-    "config": {
-        "platform": {
-            "php": "7.4.0"
-        }
+        "phpspec/prophecy": "^1.6"
     }
 }
 
