@@ -12,8 +12,8 @@
         }
     ],
     "require": {
-        "doctrine/instantiator": "^1.0.5",
-        "phpspec/prophecy": "^1.6"
+        "doctrine/instantiator": "^1.0.4",
+        "phpspec/prophecy": "^1.10"
     }
 }
 
