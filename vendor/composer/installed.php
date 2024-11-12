@@ -3,7 +3,7 @@
         'name' => 'ubuntu/ansible-config-mgt',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'ffc0619f9a5dfa218b5620b1bd349cb133149035',
+        'reference' => 'cc2b3fdadc13895129530dbf826e0d0f33daa972',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -103,202 +103,202 @@
         'illuminate/auth' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/broadcasting' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/bus' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/cache' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/collections' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/config' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/console' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/container' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/contracts' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/cookie' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/database' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/encryption' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/events' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/filesystem' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/hashing' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/http' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/log' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/macroable' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/mail' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/notifications' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/pagination' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/pipeline' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/queue' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/redis' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/routing' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/session' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/support' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/testing' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/translation' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/validation' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'illuminate/view' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v8.83.27',
+                0 => 'v8.83.28',
             ),
         ),
         'laravel/framework' => array(
-            'pretty_version' => 'v8.83.27',
-            'version' => '8.83.27.0',
-            'reference' => 'e1afe088b4ca613fb96dc57e6d8dbcb8cc2c6b49',
+            'pretty_version' => 'v8.83.28',
+            'version' => '8.83.28.0',
+            'reference' => '83e64679d0688ee83b9224b60831dcf4b1a812f7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/framework',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'laravel/serializable-closure' => array(
-            'pretty_version' => 'v1.3.5',
-            'version' => '1.3.5.0',
-            'reference' => '1dc4a3dbfa2b7628a3114e43e32120cce7cdda9c',
+            'pretty_version' => 'v1.3.6',
+            'version' => '1.3.6.0',
+            'reference' => 'f865a58ea3a0107c336b7045104c75243fa59d96',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel/serializable-closure',
             'aliases' => array(),
@@ -341,9 +341,9 @@
             'dev_requirement' => false,
         ),
         'monolog/monolog' => array(
-            'pretty_version' => '2.9.3',
-            'version' => '2.9.3.0',
-            'reference' => 'a30bfe2e142720dfa990d0a7e573997f5d884215',
+            'pretty_version' => '2.10.0',
+            'version' => '2.10.0.0',
+            'reference' => '5cf826f2991858b54d5c3809bee745560a1042a7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../monolog/monolog',
             'aliases' => array(),
@@ -401,9 +401,9 @@
             'dev_requirement' => false,
         ),
         'phpdocumentor/reflection-docblock' => array(
-            'pretty_version' => '5.5.1',
-            'version' => '5.5.1.0',
-            'reference' => '0c70d2c566e899666f367ab7b80986beb3581e6f',
+            'pretty_version' => '5.6.0',
+            'version' => '5.6.0.0',
+            'reference' => 'f3558a4c23426d12bffeaab463f8a8d8b681193c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpdocumentor/reflection-docblock',
             'aliases' => array(),
@@ -437,9 +437,9 @@
             'dev_requirement' => false,
         ),
         'phpstan/phpdoc-parser' => array(
-            'pretty_version' => '1.33.0',
-            'version' => '1.33.0.0',
-            'reference' => '82a311fd3690fb2bf7b64d5c98f912b3dd746140',
+            'pretty_version' => '2.0.0',
+            'version' => '2.0.0.0',
+            'reference' => 'c00d78fb6b29658347f9d37ebe104bffadf36299',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpstan/phpdoc-parser',
             'aliases' => array(),
@@ -848,7 +848,7 @@
         'ubuntu/ansible-config-mgt' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'ffc0619f9a5dfa218b5620b1bd349cb133149035',
+            'reference' => 'cc2b3fdadc13895129530dbf826e0d0f33daa972',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

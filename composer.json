@@ -21,8 +21,5 @@
             "php": "8.0"
         }
     }
-    "post-install-cmd": [
-    "php artisan clear-compiled"
-]
-
 }
+
