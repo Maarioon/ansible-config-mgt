@@ -3,7 +3,7 @@
         'name' => 'ubuntu/ansible-config-mgt',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'aea5dc9997877f9cf5f64703f15b548c516b5c0f',
+        'reference' => '3cf743a823c769cce27ff8ddf21df16f2e7e6383',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -112,7 +112,7 @@
         'ubuntu/ansible-config-mgt' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'aea5dc9997877f9cf5f64703f15b548c516b5c0f',
+            'reference' => '3cf743a823c769cce27ff8ddf21df16f2e7e6383',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
