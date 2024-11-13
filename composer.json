@@ -1,20 +1,21 @@
 {
-  "name": "ubuntu/ansible-config-mgt",
-  "description": "Ansible configuration management project.",
-  "autoload": {
-    "psr-4": {
-      "Ubuntu\\AnsibleConfigMgt\\": "src/"
+    "name": "ubuntu/ansible-config-mgt",
+    "description": "Ansible configuration management project",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Ubuntu\\AnsibleConfigMgt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marioon",
+            "email": "luwamarielleky@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/instantiator": "^1.0",
+        "phpspec/prophecy": "^1.6"
     }
-  },
-  "authors": [
-    {
-      "name": "Marioon",
-      "email": "luwamarielleky@gmail.com"
-    }
-  ],
-  "require": {
-    "doctrine/instantiator": "^1.0.5",
-    "phpspec/prophecy": "^1.6"
-  },
-  "license": "proprietary"
 }
+
