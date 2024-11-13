@@ -1,7 +1,5 @@
 {
     "name": "ubuntu/ansible-config-mgt",
-    "description": "Ansible configuration management project",
-    "license": "proprietary",
     "autoload": {
         "psr-4": {
             "Ubuntu\\AnsibleConfigMgt\\": "src/"
@@ -14,8 +12,12 @@
         }
     ],
     "require": {
-        "doctrine/instantiator": "^1.0",
+        "doctrine/instantiator": "^1.0.5",
         "phpspec/prophecy": "^1.6"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "echo 'Post-install commands executed successfully'"
+        ]
     }
 }
-
