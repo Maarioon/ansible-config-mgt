@@ -1,0 +1,23 @@
+{
+    "name": "ubuntu/ansible-config-mgt",
+    "autoload": {
+        "psr-4": {
+            "Ubuntu\\AnsibleConfigMgt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Marioon",
+            "email": "luwamarielleky@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/instantiator": "^1.0.5",
+        "phpspec/prophecy": "^1.6"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "echo 'Post-install commands executed successfully'"
+        ]
+    }
+}
