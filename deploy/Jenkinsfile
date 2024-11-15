@@ -1,12 +1,9 @@
 pipeline {
     agent any
 
-    environment {
-        ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
-    }
-
     stages {
-        stage('Initial cleanup') {
+
+        stage("Initial cleanup") {
             steps {
                 dir("${WORKSPACE}") {
                     deleteDir()
@@ -20,51 +17,28 @@ pipeline {
             }
         }
 
-        stage('Prepare Ansible For Execution') {
+        stage('Prepare Dependencies') {
             steps {
-                sh 'echo ${WORKSPACE}'
-                sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'
+                sh 'mv .env.sample .env'               // Rename .env file
+                sh 'composer install'                  // Install dependencies
+                sh 'php artisan migrate'               // Run database migrations
+                sh 'php artisan db:seed'               // Seed the database
+                sh 'php artisan key:generate'          // Generate application key
             }
         }
 
-        stage('Test SSH Connections') {
+        stage('Execute Unit Tests') {
             steps {
-                script {
-                    def allHosts = [
-                        'ubuntu@172.31.2.94',
-                        'ubuntu@172.31.5.230',
-                        'ubuntu@172.31.10.36',
-                        'ubuntu@172.31.1.59'
-                    ]
-
-                    sshagent(['private-key']) {
-                        allHosts.each { host ->
-                            sh "ssh -o StrictHostKeyChecking=no ${host} exit"
-                        }
-                    }
-                }
+                sh './vendor/bin/phpunit'              // Run unit tests
             }
         }
 
-        stage('Run Ansible playbook') {
+        stage('Code Analysis') {
             steps {
-                sshagent(['private-key']) {
-                    ansiblePlaybook(
-                        become: true,
-                        credentialsId: 'private-key',
-                        disableHostKeyChecking: true,
-                        installation: 'ansible',
-                        inventory: '${WORKSPACE}/inventory/dev.yml',
-                        playbook: '${WORKSPACE}/playbooks/site.yml'
-                    )
-                }
-            }
-        }
-
-        stage('Clean Workspace after build') {
-            steps {
-                cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
+                // Run phploc for code analysis and save output to CSV
+                sh 'phploc app/ --log-csv build/logs/phploc.csv'
             }
         }
     }
 }
+
