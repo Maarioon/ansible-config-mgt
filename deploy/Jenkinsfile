@@ -33,12 +33,7 @@ pipeline {
             }
         }
 
-        stage('Debug') {
-	    steps {
-        	sh 'ls -l ${WORKSPACE}'
-        	sh 'ls -l ${WORKSPACE}/path-to-laravel-project'
-   	   }	
-       } 	        
+        	        
 
         stage('Code Analysis') {
             steps {
