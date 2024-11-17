@@ -1,70 +1,43 @@
-        pipeline {
-               agent any
-             
-               environment {
-                 ANSIBLE_CONFIG = "${WORKSPACE}/deploy/ansible.cfg"
-                 ANSIBLE_HOST_KEY_CHECKING = 'False'
-               }
-             
-               stages {
-                 stage("Initial cleanup") {
-                   steps {
-                     dir("${WORKSPACE}") {
-                       deleteDir()
-                     }
-                   }
-                 }
+pipeline {
+    agent any
 
-                 stage('Checkout SCM') {
-                   steps {
-                     git branch: 'main', url: 'https://github.com/Maarioon/ansible-config-mgt.git'
-                   }
-                 }
-             
-                 stage('Prepare Ansible For Execution') {
-                   steps {
-                     sh 'echo ${WORKSPACE}'
-                     sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'
-                   }
-                 }
-             
-                 stage('Test SSH Connections') {
-                   steps {
-                     script {
-                       def hosts = [
-                        'ubuntu@172.31.2.94',
-                        'ubuntu@172.31.5.230',
-                        'ubuntu@172.31.10.36',
-                        'ubuntu@172.31.1.59'
-                       ]
-                       for (host in hosts) {
-                         sshagent(['private-key']) {
-                           sh "ssh -o StrictHostKeyChecking=no -A ${host} exit"
-                         }
-                       }
-                     }
-                   }
-                 }
-             
-                 stage('Run Ansible playbook') {
-                   steps {
-                     sshagent(['private-key']) {
-                       ansiblePlaybook(
-                         become: true,
-                         credentialsId: 'private-key',
-                         disableHostKeyChecking: true,
-                         installation: 'ansible',
-                         inventory: "${WORKSPACE}/inventory/dev.yml",
-                         playbook: "${WORKSPACE}/playbooks/site.yml"
-                       )
-                     }
-                   }
-                 }
-             
-                 stage('Clean Workspace after build') {
-                   steps {
-                     cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
-                   }
-                 }
-               }
-             }
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
+      }
+    }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+
+   stage('Execute Unit Tests') {
+      steps {
+             sh './vendor/bin/phpunit'
+      } 
+
+   stage('Code Analysis') {
+      steps {
+             sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
+      }  
+   }  
+
+  }
+}

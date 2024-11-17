@@ -7,7 +7,8 @@
 - name: Webserver assignment
   import_playbook: ../static-assignments/uat-webservers.yml
 
-- name: Loadbalancers assignment
-  import_playbook: ../static-assignments/loadbalancers.yml
-  when: load_balancer_is_required
+- import_playbook: ../static-assignments/artifactory.yml
+  tags:
+    - artifactory
+
 
