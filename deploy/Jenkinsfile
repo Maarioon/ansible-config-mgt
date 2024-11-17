@@ -27,6 +27,14 @@ pipeline {
             }
         }
 
+        stages {
+        stage('Prepare Environment') {
+            steps {
+                sh 'mkdir -p bootstrap/cache'
+                sh 'chmod -R 775 bootstrap/cache'
+            }
+        }
+
         stage('Execute Unit Tests') {
             steps {
                 sh './vendor/bin/phpunit'              // Run unit tests
