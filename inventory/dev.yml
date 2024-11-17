@@ -2,7 +2,7 @@ all:
   children:
     todo:
       hosts:
-        172.31.6.136:
+        172.31.5.230:
           ansible_user: ubuntu
           ansible_ssh_private_key_file: /home/ubuntu/.ssh/marion-dev.pem
 
