@@ -39,7 +39,7 @@
                        ]
                        for (host in hosts) {
                          sshagent(['private-key']) {
-                           sh "ssh -o StrictHostKeyChecking=no -i /home/ubuntu/.ssh/marion-dev.pem ${host.user}@${host.ip} exit"
+                           sh "ssh -o StrictHostKeyChecking=no -A ${host} exit"
                          }
                        }
                      }
