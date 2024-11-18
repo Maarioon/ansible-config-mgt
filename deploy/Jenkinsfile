@@ -31,8 +31,8 @@ pipeline {
 
         stage('Execute Unit Tests') {
             steps {
-                sh 'echo pass'
-                // sh './vendor/bin/phpunit'
+                
+                sh './vendor/bin/phpunit'
             }
         }
 
@@ -44,5 +44,6 @@ pipeline {
                 sh 'phploc app/ --log-csv build/logs/phploc.csv'
             }
         }
+              
     }
 }
