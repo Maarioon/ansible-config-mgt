@@ -1,44 +1,45 @@
 pipeline {
     agent any
 
-  stages {
-
-     stage("Initial cleanup") {
-          steps {
-            dir("${WORKSPACE}") {
-              deleteDir()
+    stages {
+        stage('Initial Cleanup') {
+            steps {
+                dir("${WORKSPACE}") {
+                    deleteDir()
+                }
             }
-          }
         }
 
-    stage('Checkout SCM') {
-      steps {
-            git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
-      }
+        stage('Checkout SCM') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
+            }
+        }
+
+        stage('Prepare Dependencies') {
+            steps {
+                sh 'mv .env.sample .env'
+                sh 'composer install'
+                sh 'php artisan migrate'
+                sh 'php artisan db:seed'
+                sh 'php artisan key:generate'
+            }
+        }
+
+        stage('Execute Unit Tests') {
+            steps {
+                sh './vendor/bin/phpunit'
+            }
+        }
+
+        stage('Code Analysis') {
+            steps {
+                // Ensure logs directory exists
+                sh 'mkdir -p build/logs'
+                // Run code analysis
+                sh 'phploc app/ --log-csv build/logs/phploc.csv'
+            }
+        }
     }
-
-    stage('Prepare Dependencies') {
-      steps {
-             sh 'mv .env.sample .env'
-             sh 'composer install'
-             sh 'php artisan migrate'
-             sh 'php artisan db:seed'
-             sh 'php artisan key:generate'
-      }
-    }
-
-   stage('Execute Unit Tests') {
-      steps {
-             sh './vendor/bin/phpunit'
-      } 
-   }
-   stage('Code Analysis') {
-      steps {
-             sh 'phploc app/ --log-csv build/logs/phploc.csv'
-
-      }  
-   }  
-
-  }
 }
-}
+
