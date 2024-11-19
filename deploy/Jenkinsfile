@@ -1,41 +1,6 @@
 
 pipeline {
-      agent any
-  
-      stages {
-          stage('Initial Cleanup') {
-            steps {
-                dir("${WORKSPACE}") {
-                    deleteDir()
-                }
-            }
-        }
-
-        stage('Checkout SCM') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
-            }
-        }
-
-        stage('Prepare Dependencies') {
-            steps {
-                 sh 'echo pass'
-                //sh 'echo pass'
-                //sh 'mv .env.sample .env'
-                //sh 'composer install'
-                //sh 'php artisan migrate'
-               // sh 'php artisan db:seed'
-                //sh 'php artisan key:generate'
-                //sh 'composer install'
-            }
-        }
-
-        stage('Execute Unit Tests') {
-            steps {
-                sh 'echo pass'
-                //sh '~/vendor/bin/phpunit'
-            }
-        }
+    
 
         stage('Code Analysis') {
             steps {
