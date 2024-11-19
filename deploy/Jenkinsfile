@@ -1,6 +1,6 @@
 pipeline {
     agent any
-  
+
     stages {
         stage('Initial Cleanup') {
             steps {
@@ -14,8 +14,7 @@ pipeline {
             steps {
                 script {
                     echo "Checking out source code from SCM..."
-                    // Uncomment the line below and configure your repository
-                    // git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/Maarioon/php-todo2-jk.git'
+                    git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/Maarioon/php-todo2-jk.git'
                 }
             }
         }
@@ -24,12 +23,11 @@ pipeline {
             steps {
                 script {
                     echo "Preparing dependencies..."
-                    // Uncomment the lines below to prepare the environment
-                    // sh 'mv .env.sample .env'
-                    // sh 'composer install'
-                    // sh 'php artisan migrate'
-                    // sh 'php artisan db:seed'
-                    // sh 'php artisan key:generate'
+                    sh 'mv .env.sample .env'
+                    sh 'composer install'
+                    sh 'php artisan migrate'
+                    sh 'php artisan db:seed'
+                    sh 'php artisan key:generate'
                 }
             }
         }
@@ -38,8 +36,7 @@ pipeline {
             steps {
                 script {
                     echo "Executing unit tests..."
-                    // Uncomment the line below to execute unit tests
-                    // sh './vendor/bin/phpunit'
+                    sh './vendor/bin/phpunit'
                 }
             }
         }
@@ -57,7 +54,6 @@ pipeline {
         stage('Plot Code Coverage Report') {
             steps {
                 script {
-                    // Update plotting titles and settings as required
                     plot csvFileName: 'plot-code-coverage.csv', 
                         csvSeries: [[file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING']], 
                         group: 'phploc', numBuilds: '100', style: 'line', title: 'Code Coverage Metrics', yaxis: 'Metrics'
@@ -92,5 +88,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Dev Environment') {
+            steps {
+                build job: 'ansible-config-mgt/main', 
+                      parameters: [[$class: 'StringParameterValue', name: 'inventory', value: 'dev']], 
+                      propagate: false, wait: true
+            }
+        }
     }
+
 }
