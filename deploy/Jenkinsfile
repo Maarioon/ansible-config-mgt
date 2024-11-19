@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sh 'echo pass'
                 // Uncomment the line below when SCM setup is ready
-                 git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
+                 //git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
             }
         }
 
