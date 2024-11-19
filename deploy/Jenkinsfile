@@ -13,6 +13,7 @@ pipeline {
 
         stage('Checkout SCM') {
             steps {
+                sh 'echo pass'
                 //git branch: 'main', url: 'https://github.com/Maarioon/php-todo2-jk.git'
             }
         }
