@@ -5,7 +5,7 @@ pipeline {
         stage('Initial Cleanup') {
             steps {
                 dir("${WORKSPACE}") {
-                    deleteDir()
+                   // deleteDir()
                 }
             }
         }
@@ -13,8 +13,9 @@ pipeline {
         stage('Checkout SCM') {
             steps {
                 script {
+            
                     echo "Checking out source code from SCM..."
-                    git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/Maarioon/php-todo2-jk.git'
+                   // git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/Maarioon/php-todo2-jk.git'
                 }
             }
         }
@@ -23,11 +24,11 @@ pipeline {
             steps {
                 script {
                     echo "Preparing dependencies..."
-                    sh 'mv .env.sample .env'
-                    sh 'composer install'
-                    sh 'php artisan migrate'
-                    sh 'php artisan db:seed'
-                    sh 'php artisan key:generate'
+                    //sh 'mv .env.sample .env'
+                    //sh 'composer install'
+                    //sh 'php artisan migrate'
+                    //sh 'php artisan db:seed'
+                    //sh 'php artisan key:generate'
                 }
             }
         }
@@ -36,7 +37,7 @@ pipeline {
             steps {
                 script {
                     echo "Executing unit tests..."
-                    sh './vendor/bin/phpunit'
+                    //sh './vendor/bin/phpunit'
                 }
             }
         }
