@@ -19,6 +19,7 @@ pipeline {
 
         stage('Prepare Dependencies') {
             steps {
+                 sh 'echo pass'
                 //sh 'echo pass'
                 //sh 'mv .env.sample .env'
                 //sh 'composer install'
