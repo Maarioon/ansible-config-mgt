@@ -5,8 +5,8 @@ pipeline {
       stages {
           stage('Initial Cleanup') {
             steps {
-                dir("$HOME") {
-                    //deleteDir()
+                dir("${WORKSPACE}") {
+                    deleteDir()
                 }
             }
         }
