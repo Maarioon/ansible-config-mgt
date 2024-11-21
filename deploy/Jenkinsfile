@@ -1,25 +1,24 @@
 pipeline {
     agent any
-
+    
     stages {
         stage('Initial Cleanup') {
             steps {
                 dir("${WORKSPACE}") {
-                   // deleteDir()
+                    // deleteDir()
                 }
             }
         }
-
+        
         stage('Checkout SCM') {
             steps {
                 script {
-            
                     echo "Checking out source code from SCM..."
-                   // git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/Maarioon/php-todo2-jk.git'
+                    // git branch: 'main', credentialsId: 'your-credentials-id', url: 'https://github.com/Maarioon/php-todo2-jk.git'
                 }
             }
         }
-
+        
         stage('Prepare Dependencies') {
             steps {
                 script {
@@ -32,7 +31,7 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Execute Unit Tests') {
             steps {
                 script {
@@ -41,7 +40,7 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Code Analysis') {
             steps {
                 script {
@@ -51,17 +50,23 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Plot Code Coverage Report') {
             steps {
                 script {
                     plot csvFileName: 'plot-code-coverage.csv', 
-                        csvSeries: [[file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING']], 
-                        group: 'phploc', numBuilds: '100', style: 'line', title: 'Code Coverage Metrics', yaxis: 'Metrics'
+                         csvSeries: [
+                             [file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING']
+                         ], 
+                         group: 'phploc', 
+                         numBuilds: '100', 
+                         style: 'line', 
+                         title: 'Code Coverage Metrics', 
+                         yaxis: 'Metrics'
                 }
             }
         }
-
+        
         stage('Package Artifact') {
             steps {
                 script {
@@ -70,7 +75,7 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Upload Artifact to Artifactory') {
             steps {
                 script {
@@ -89,29 +94,27 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Deploy to Dev Environment') {
             steps {
                 build job: 'ansible-config-mgt/main', 
-                      parameters: [[$class: 'StringParameterValue', name: 'inventory', value: 'dev']], 
-                      propagate: false, wait: true
+                      parameters: [
+                          [$class: 'StringParameterValue', name: 'inventory', value: 'dev']
+                      ], 
+                      propagate: false, 
+                      wait: true
             }
         }
+        
         stage('SonarQube Quality Gate') {
-        environment {
-            scannerHome = tool 'SonarQubeScanner'
-        }
-        steps {
-            withSonarQubeEnv('sonarqube') {
-                sh "${scannerHome}/bin/sonar-scanner"
+            environment {
+                scannerHome = tool 'SonarQubeScanner'
             }
-
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
         }
     }
-
-    }
-
 }
-
-
-
